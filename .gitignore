@@ -1,0 +1,7 @@
+#Downloaded truth data
+truth/covidtracking.com
+truth/CSSE
+
+#Downloaded forecasts
+forecasts/covid19-forecast-hub
+forecasts/IHME
