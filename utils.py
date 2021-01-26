@@ -12,6 +12,13 @@ def xaxis_months(fig, ax):
     fig.autofmt_xdate()
 
 
+def get_location_string(location):
+    if location in abbr_to_state.keys():
+        return(abbr_to_state[location])
+    else:
+        return(location)
+
+
 state_to_abbr = {
     'Alabama': 'AL',
     'Alaska': 'AK',

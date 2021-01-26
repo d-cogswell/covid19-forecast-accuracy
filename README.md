@@ -1,9 +1,11 @@
 # Compare COVID19 forcasts against truth data
 
-A collection of Bash and Python scripts to download, process, plot, and compare COVID19 data and forecasts. Each separate data set has its own unique organziation, and the goal of this project is to provide a standard way of manipulating data from different sources. Each data set is loaded as a Pandas dataframe with the following required fields:
+A collection of Bash and Python scripts to download, process, plot, and compare COVID19 data and forecasts. Each separate data set has its own unique organziation, and the goal of this project is to provide a standard way of manipulating data from different sources. Each data set is loaded as a Pandas dataframe with the following standardized fields:
 - `date` : calendar date for each record, stored as a `datetime` object
 - `cases` : new number cases reported each day
 - `cumCases` : the cumulative number of cases that have been reported
+- `hosptialAdmissions` : new hospital admissions reported each day
+- `hospitalizedCurrently` : number of people currently hospitalized at each date
 - `deaths` : new number of deaths reported each day
 - `cumDeaths` : the cumulative number of deaths
 
@@ -11,9 +13,6 @@ A collection of Bash and Python scripts to download, process, plot, and compare 
 
 - JHU CSSE: https://coronavirus.jhu.edu/
 - covidtracking.com: https://covidtracking.com/
-
-### Not yet implemented
-
 - healthdata.gov: https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries
 
 ## Forecasts available:

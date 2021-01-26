@@ -4,8 +4,11 @@ import utils
 import truth.CSSE as truth
 
 
+# Choose a location
+loc = "US"
+
 # Load truth data
-truth_df = truth.load(location="US")
+truth_df = truth.load(location=loc)
 
 
 # Plot 7-day moving averages
@@ -21,6 +24,7 @@ ax_r.plot(truth_df['date'][6:], utils.moving_avg(
 # Set the x-axis labels to months
 utils.xaxis_months(fig, ax)
 
+ax.set_title(utils.get_location_string(loc))
 ax.set_xlabel('Date')
 ax.set_ylabel("Daily Deaths")
 ax_r.set_ylabel("Cumulative Deaths")

@@ -1,6 +1,7 @@
 #Downloaded truth data
 truth/covidtracking.com
 truth/CSSE
+truth/healthdata.gov
 
 #Downloaded forecasts
 forecasts/covid19-forecast-hub
