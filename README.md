@@ -1,6 +1,11 @@
 # Compare COVID19 forcasts against truth data
 
-A collection of Bash and Python scripts to download, process, plot, and compare COVID19 data and forecasts.
+A collection of Bash and Python scripts to download, process, plot, and compare COVID19 data and forecasts. Each separate data set has its own unique organziation, and the goal of this project is to provide a standard way of manipulating data from different sources. Each data set is loaded as a Pandas dataframe with the following required fields:
+- `date` : calendar date for each record, stored as a `datetime` object
+- `cases` : new number cases reported each day
+- `cumCases` : the cumulative number of cases that have been reported
+- `deaths` : new number of deaths reported each day
+- `cumDeaths` : the cumulative number of deaths
 
 ## Truth data sources
 
