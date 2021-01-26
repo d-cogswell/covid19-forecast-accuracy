@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+import utils
+
 
 def load(location="US"):
 
@@ -11,6 +13,11 @@ def load(location="US"):
         if location == "US":
             df = df.groupby('Country_Region').sum()
         else:
+
+            # If location is an abbreviation, convert to name
+            if location in utils.abbr_to_state.keys():
+                location = utils.abbr_to_state[location]
+
             df = df[df['Province_State'] == location]
             df = df.groupby('Province_State').sum()
 
