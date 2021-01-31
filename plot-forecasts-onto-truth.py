@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from datetime import datetime
 
 import utils
@@ -25,7 +26,9 @@ ax.plot(truth_date, truth_cumDeaths, linewidth=2,
 forecast_dates = forecast.list_dates()
 for date in forecast_dates:
     forecast_df = forecast.load(date, location=loc)
-    ax.plot(forecast_df['date'], forecast_df['cumDeaths'], linestyle='--')
+    mask = np.isfinite(forecast_df['cumDeaths'])  # Filter out NaN
+    ax.plot(forecast_df['date'][mask],
+            forecast_df['cumDeaths'][mask], linestyle='--')
 
 # format the ticks
 utils.xaxis_months(fig, ax)
