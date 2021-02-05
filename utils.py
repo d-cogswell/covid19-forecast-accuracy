@@ -79,3 +79,34 @@ state_to_abbr = {
 }
 
 abbr_to_state = dict(map(reversed, state_to_abbr.items()))
+
+
+# Error functions, F is forecast, A is actual
+def abs_err(F, A):
+    return(np.abs(F-A))
+
+
+def rel_err(F, A):
+    return((F-A)/A)
+
+
+def abs_rel_err(F, A):
+    return(np.abs((F-A)/A))
+
+
+# Returns an array of errors for each deate in model_dates, evaulated using errorFunc
+def model_error(true_dates, true_vals, model_dates, model_vals, errorFunc):
+    true_dict = dict(zip(true_dates, true_vals))
+    model_dict = dict(zip(model_dates, model_vals))
+
+    error = []
+    for date in model_dict.keys():
+        # Make sure the true value exists
+        try:
+            if true_dict[date]:
+                error.append(errorFunc(model_dict[date], true_dict[date]))
+        except Exception:
+            error.append(None)
+            pass
+
+    return(error)
