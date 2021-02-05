@@ -10,6 +10,21 @@ def list_models():
     return(dirnames)
 
 
+#Returns a dictionary of models and weights to create the ensemble
+def ensemble_model_weights_cumDeaths(date, location="US"):
+    datestr = pd.to_datetime(date).strftime('%Y-%m-%d')
+    file= osp.join(dir,'../ensemble-metadata/',datestr+'-cum_death-model-weights.csv')
+    weights=pd.read_csv(file)
+
+    #Filter for location and remove field
+    loc=weights[weights['locations']==location]
+    loc=loc.drop('locations',1)
+
+    models = loc.keys()
+    wts = loc[models].iloc[0]
+    return(dict(zip(models,wts)))
+
+
 def list_dates(model="COVIDhub-ensemble"):
     dates = []
     _, _, filenames = next(walk(osp.join(dir, model)))
