@@ -17,7 +17,7 @@ csv_files = [
 ]
 
 
-def list_dates():
+def list_dates(model=None):
     dates = []
     for (dirpath, dirnames, filenames) in walk(dir):
         for d in dirnames:
@@ -26,7 +26,7 @@ def list_dates():
     return(dates)
 
 
-def load(date, location="United States of America"):
+def load(date, location="United States of America", model=None):
     location_dict = {
         "US": "United States of America",
     }
