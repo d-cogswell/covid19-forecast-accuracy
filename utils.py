@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.dates as mdates
+import pandas as pd
 
 
 def moving_avg(x, N):
@@ -110,3 +111,29 @@ def model_error(true_dates, true_vals, model_dates, model_vals, errorFunc):
             pass
 
     return(error)
+
+
+def compute_error_all_forecasts(forecast, true_dates, true_vals, errorFunc, dates=None, location="US", model="COVIDhub-ensemble"):
+    """Returns a DataFrame with error computed for every forecast"""
+    df = pd.DataFrame({'forecast_date': [], 'date': [],
+                       'days_ahead': [], 'error': []})
+    if not dates:
+        dates = forecast.list_dates(model)
+
+    for d in dates:
+        data = forecast.load(d, location=location, model=model)
+
+        # Compute the error
+        err = model_error(true_dates, true_vals,
+                          data['date'], data['cumDeaths'], errorFunc)
+        time_diff = data['date']-d
+        days = time_diff.dt.days.tolist()
+
+        new = pd.DataFrame({'forecast_date': [
+                           d]*len(err), 'date': data['date'], 'days_ahead': days, 'error': err})
+        df = pd.concat([df, new], axis=0)
+
+    # Filter out NaN
+    df = df[np.isfinite(df['error'])]
+
+    return(df)
