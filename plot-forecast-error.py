@@ -42,6 +42,24 @@ ax.set_ylabel('Mean Absolute Percentage Error')
 plt.show()
 
 
+# Plot error quantiles vs forcast days ahead
+###############################################################################
+fig, ax = plt.subplots()
+
+# Compute quantiles
+q25 = error_df.groupby('days_ahead')['error'].quantile(q=0.25)
+q50 = error_df.groupby('days_ahead')['error'].quantile(q=0.50)
+q75 = error_df.groupby('days_ahead')['error'].quantile(q=0.75)
+
+ax.plot(q50.keys(), q50)
+plt.fill_between(q50.keys(), q25, q75, color='gray', alpha=0.2)
+
+ax.set_xlabel('Forecasted days ahead')
+ax.set_ylabel('Median Absolute Percentage Error')
+
+plt.show()
+
+
 # Plot error of each forecast through time
 ##############################################################################
 fig, ax = plt.subplots()
