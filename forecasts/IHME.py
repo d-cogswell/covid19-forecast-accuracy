@@ -46,6 +46,11 @@ def load(date, location="United States of America", model=None):
     if location in utils.abbr_to_state.keys():
         location = utils.abbr_to_state[location]
 
+    # If 'United States of America' doesn't exist in 'location_name', try 'US'
+    # This was an issue in some of the early data sets
+    if location == "United States of America" and data['location_name'].str.contains('US').any():
+        location = 'US'
+
     # Filter for location
     data = data[data['location_name'] == location]
 
