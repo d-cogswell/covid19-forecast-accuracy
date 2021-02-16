@@ -16,11 +16,8 @@ fig, ax = plt.subplots()
 
 # Plot truth
 truth_df = truth.load(location=loc)
-truth_date = truth_df['date'][6:]
-truth_cases = utils.moving_avg(truth_df['cases'], 7)
-truth_cumDeaths = utils.moving_avg(truth_df['cumDeaths'], 7)
-ax.plot(truth_date, truth_cumDeaths, linewidth=2,
-        color='black', label='Actual')
+ax.plot(truth_df['date'], truth_df['cumDeaths'],
+        linewidth=2, color='black', label='Actual')
 
 # Plot forecasts
 forecast_dates = forecast.list_dates()

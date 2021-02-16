@@ -16,6 +16,7 @@ truth_df = truth.load(location=loc)
 fig, ax = plt.subplots()
 ax_r = ax.twinx()
 
+# Plot 7-day moving averages
 ax.plot(truth_df['date'][6:], utils.moving_avg(
     truth_df['deaths'], 7), label='Daily deaths', color='C0')
 ax_r.plot(truth_df['date'][6:], utils.moving_avg(
