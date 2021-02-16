@@ -16,11 +16,8 @@ truth_df = truth.load(location=loc)
 ###############################################################################
 dates = forecast.list_dates()
 error_df = utils.compute_error_all_forecasts(
-    forecast, truth_df['date'],
-    truth_df['cumDeaths'],
-    utils.abs_rel_err,
-    dates=dates,
-    location=loc)
+    forecast, truth_df, utils.abs_rel_err,
+    field='cumDeaths', dates=dates, location=loc)
 
 
 # Plot error vs forcast days ahead

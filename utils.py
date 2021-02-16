@@ -113,7 +113,9 @@ def model_error(true_dates, true_vals, model_dates, model_vals, errorFunc):
     return(error)
 
 
-def compute_error_all_forecasts(forecast, true_dates, true_vals, errorFunc, dates=None, location="US", model="COVIDhub-ensemble"):
+def compute_error_all_forecasts(forecast, truth_df, errorFunc,
+                                field='cumDeaths', dates=None,
+                                location="US", model="COVIDhub-ensemble"):
     """Returns a DataFrame with error computed for every forecast"""
     df = pd.DataFrame({'forecast_date': [], 'date': [],
                        'days_ahead': [], 'error': []})
@@ -124,8 +126,8 @@ def compute_error_all_forecasts(forecast, true_dates, true_vals, errorFunc, date
         data = forecast.load(d, location=location, model=model)
 
         # Compute the error
-        err = model_error(true_dates, true_vals,
-                          data['date'], data['cumDeaths'], errorFunc)
+        err = model_error(truth_df['date'], truth_df[field],
+                          data['date'], data[field], errorFunc)
         time_diff = data['date']-d
         days = time_diff.dt.days.tolist()
 
