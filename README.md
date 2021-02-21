@@ -22,6 +22,8 @@ A collection of Bash and Python scripts to download, process, plot, and compare 
 
 ## Installation
 
+Downloading data requires a Bash shell scripting envoronment. Windows users are encouraged to use the Windows Subsystem for Linux (WSL). The following prerequisites are required to run the Bash scripts: `wget`, `curl`, `unzip`, `git`
+
 Data can be downloaded by running the following commands from the root directory. Beware that the forecasting data requires >20GB of storage space, and the initial download takes significant time. Running the commands again will fetch and process any new data.
 
 Download/update forecast data:
