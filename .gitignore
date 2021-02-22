@@ -6,3 +6,4 @@ truth/healthdata.gov
 #Downloaded forecasts
 forecasts/covid19-forecast-hub
 forecasts/IHME
+forecasts/CDC-ensemble-hospitalizations
