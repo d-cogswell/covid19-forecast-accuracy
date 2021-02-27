@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 import utils
 
@@ -12,31 +13,15 @@ loc = "US"
 truth_df = truth.load(location=loc)
 
 
-# Load forecasts and compute errors
+# Load all forecasts and compute relative errors
 ###############################################################################
 dates = forecast.list_dates()
 error_df = utils.compute_error_all_forecasts(
-    forecast, truth_df, utils.abs_rel_err,
-    field='cumDeaths', dates=dates, location=loc)
-
-
-# Plot error vs forcast days ahead
-###############################################################################
-fig, ax = plt.subplots()
-
-error_mean = error_df.groupby('days_ahead')['error'].mean()
-ax.plot(error_mean.keys(), error_mean)
-
-error_std = error_df.groupby('days_ahead')['error'].std()
-plt.fill_between(error_mean.keys(),
-                 error_mean.values - error_std.values,
-                 error_mean.values + error_std.values,
-                 color='gray', alpha=0.2)
-
-ax.set_xlabel('Forecasted days ahead')
-ax.set_ylabel('Mean Absolute Percentage Error')
-
-plt.show()
+    forecast, truth_df,
+    utils.rel_err,
+    field='cumDeaths',
+    dates=dates,
+    location=loc)
 
 
 # Plot error quantiles vs forcast days ahead
@@ -52,15 +37,16 @@ ax.plot(q50.keys(), q50)
 plt.fill_between(q50.keys(), q25, q75, color='gray', alpha=0.2)
 
 ax.set_xlabel('Forecasted days ahead')
-ax.set_ylabel('Median Absolute Percentage Error')
+ax.set_ylabel('Median Percentage Error')
 
 plt.show()
 
 
-# Plot error of each forecast through time
+# Plot MAPE of each forecast through time
 ##############################################################################
 fig, ax = plt.subplots()
 
+error_df['error'] = np.abs(error_df['error'])
 df_error_mean = error_df.groupby('forecast_date')['error'].mean()
 ax.scatter(df_error_mean.keys(), df_error_mean)
 
