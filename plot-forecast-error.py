@@ -28,10 +28,14 @@ error_df = utils.compute_error_all_forecasts(
 ###############################################################################
 fig, ax = plt.subplots()
 
+# Maximum number of days ahead to consider
+days_ahead = 28
+error_flt = error_df[error_df['days_ahead'] < days_ahead]
+
 # Compute quantiles
-q25 = error_df.groupby('days_ahead')['error'].quantile(q=0.25)
-q50 = error_df.groupby('days_ahead')['error'].quantile(q=0.50)
-q75 = error_df.groupby('days_ahead')['error'].quantile(q=0.75)
+q25 = error_flt.groupby('days_ahead')['error'].quantile(q=0.25)
+q50 = error_flt.groupby('days_ahead')['error'].quantile(q=0.50)
+q75 = error_flt.groupby('days_ahead')['error'].quantile(q=0.75)
 
 ax.plot(q50.keys(), q50)
 plt.fill_between(q50.keys(), q25, q75, color='gray', alpha=0.2)
