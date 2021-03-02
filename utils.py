@@ -139,3 +139,14 @@ def compute_error_all_forecasts(forecast, truth_df, errorFunc,
     df = df[np.isfinite(df['error'])]
 
     return(df)
+
+
+def get_population(location):
+    locations = pd.read_csv(
+        'forecasts/covid19-forecast-hub/data-locations/locations.csv')
+
+    # If location is an abbreviation, convert to name
+    if location in abbr_to_state.keys():
+        location = abbr_to_state[location]
+
+    return(locations[locations['location_name'] == location]['population'].iat[0])
