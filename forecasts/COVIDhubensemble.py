@@ -110,6 +110,10 @@ def load_CDC_ensemble_hospitalization(date, location="US", model="COVIDhub-ensem
     if file == '':
         return(pd.DataFrame({'date': [], 'hospitalAdmissions': []}))
 
+    # The 6/1/2020 data is missing the 'target_end_date' field
+    if date == datetime(2020, 6, 1):
+        return(pd.DataFrame({'date': [], 'hospitalAdmissions': []}))
+
     data = pd.read_csv(osp.join(dir, model, file))
 
     # Filter for model
