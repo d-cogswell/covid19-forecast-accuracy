@@ -10,12 +10,14 @@ import truth.CSSE as truth
 # Choose a location
 loc = "US"
 
+# Load truth data
+truth_df = truth.load(location=loc)
+
 # Plot forecasts onto truth data
 ###############################################################################
 fig, ax = plt.subplots()
 
 # Plot truth
-truth_df = truth.load(location=loc)
 ax.plot(truth_df['date'], truth_df['cumDeaths'],
         linewidth=2, color='black', label='Actual')
 
