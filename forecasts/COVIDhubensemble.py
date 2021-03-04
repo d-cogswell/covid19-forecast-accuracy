@@ -11,6 +11,7 @@ dir = 'forecasts/covid19-forecast-hub/data-processed'
 
 def list_models():
     _, dirnames, _ = next(walk(osp.join(dir)))
+    dirnames.sort(key=str.lower)
     return(dirnames)
 
 
