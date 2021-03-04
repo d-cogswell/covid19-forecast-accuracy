@@ -119,7 +119,7 @@ def compute_error_all_forecasts(forecast, truth_df, errorFunc,
     """Returns a DataFrame with error computed for every forecast"""
     df = pd.DataFrame({'forecast_date': [], 'date': [],
                        'days_ahead': [], 'error': []})
-    if not dates:
+    if dates is None:
         dates = forecast.list_dates(model)
 
     for d in dates:
