@@ -107,12 +107,12 @@ def load_CDC_ensemble_hospitalization(date, location="US", model="COVIDhub-ensem
             if dateStr in f:
                 file = f
 
-    if file == '':
-        return(pd.DataFrame({'date': [], 'hospitalAdmissions': []}))
-
+    # Return an empty dataframe if file not found
     # The 6/1/2020 data is missing the 'target_end_date' field
-    if date == datetime(2020, 6, 1):
-        return(pd.DataFrame({'date': [], 'hospitalAdmissions': []}))
+    if file == '' or date == datetime(2020, 6, 1):
+        return(
+            pd.DataFrame({'date': pd.Series([], dtype='datetime64[ns]'),
+                          'hospitalAdmissions': pd.Series([], dtype='float')}))
 
     data = pd.read_csv(osp.join(dir, model, file))
 
