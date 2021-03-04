@@ -98,11 +98,12 @@ def load(date, location="US", model="COVIDhub-ensemble"):
 
 # This function loads hospitalization forecasts downloaded from the CDC website
 def load_CDC_ensemble_hospitalization(date, location="US", model="COVIDhub-ensemble"):
+    dir = 'forecasts/CDC-ensemble-hospitalizations'
 
     # Get the file name
     file = ''
     dateStr = pd.to_datetime(date).strftime('%Y-%m-%d')
-    _, _, filenames = next(walk(osp.join(dir, 'COVIDhub-ensemble')))
+    _, _, filenames = next(walk(osp.join(dir)))
     for f in filenames:
         if 'hospitalizations-model-data' in f:
             if dateStr in f:
@@ -115,7 +116,7 @@ def load_CDC_ensemble_hospitalization(date, location="US", model="COVIDhub-ensem
             pd.DataFrame({'date': pd.Series([], dtype='datetime64[ns]'),
                           'hospitalAdmissions': pd.Series([], dtype='float')}))
 
-    data = pd.read_csv(osp.join(dir, model, file))
+    data = pd.read_csv(osp.join(dir, file))
 
     # Filter for model
     if model != 'COVIDhub-ensemble':

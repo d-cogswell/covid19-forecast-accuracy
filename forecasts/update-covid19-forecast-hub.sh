@@ -11,7 +11,7 @@ fi
 
 
 #Get additional hospitalization forecasts only available at the CDC website
-storage_dir="covid19-forecast-hub/data-processed/COVIDhub-ensemble"
+storage_dir="CDC-ensemble-hospitalizations"
 URL="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/forecasting-hospitalizations-previous.html"
 files=`curl -s $URL | egrep -o '\/[^ ]*(-all)?-hospitalizations-model-data.csv'`
 
