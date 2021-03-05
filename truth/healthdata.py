@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 import utils
 
@@ -25,8 +26,12 @@ def load(location="US"):
     df['date'] = pd.to_datetime(df['date'])
     df.sort_values(by=['date'], inplace=True)
 
+    # Do not load data before July 15, 2020
+    df = df[df['date'] >= datetime(2020, 7, 15)]
+
     # See notes here for hospital admissions:
     # https://github.com/reichlab/covid19-forecast-hub/tree/master/data-processed
+    # Values checked against https://ourworldindata.org/covid-hospitalizations
     hospitalAdmissions = df['previous_day_admission_adult_covid_confirmed'] + \
         df['previous_day_admission_pediatric_covid_confirmed']
     hospitalAdmissions = hospitalAdmissions.array
