@@ -15,6 +15,11 @@ A collection of Bash and Python scripts to download, process, plot, and compare 
 - covidtracking.com: https://covidtracking.com/
 - healthdata.gov: https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries
 
+### Not yet implemented
+
+- CDC: https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36
+- NCHS: https://www.cdc.gov/nchs/nvss/covid-19.htm
+
 ## Forecasts available:
 
 - CDC ensemble forecasts: https://www.cdc.gov/coronavirus/2019-ncov/covid-data/mathematical-modeling.html
