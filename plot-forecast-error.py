@@ -50,17 +50,27 @@ plt.show()
 ##############################################################################
 fig, ax = plt.subplots()
 
+# Plot MAPE
 error_df['error'] = np.abs(error_df['error'])
 df_error_mean = error_df.groupby('forecast_date')['error'].mean()
 ax.scatter(df_error_mean.keys(), df_error_mean)
 
+# Plot 7-day moving average of daily deaths
 ax_r = ax.twinx()
-ax_r.plot(truth_df['date'][6:], utils.moving_avg(
-    truth_df['deaths'], 7), color='black')
+truth_date = truth_df['date'][6:]
+truth_deaths = utils.moving_avg(truth_df['deaths'], 7)
+ax_r.plot(truth_date, truth_deaths, color='black')
+
+# Plot holidays
+truth_dict = dict(zip(truth_date, truth_deaths))
+for h in utils.holidays.keys():
+    date = utils.holidays[h]
+    ax_r.vlines(date, 0, truth_dict[date], ls='--', color='gray')
 
 # format the ticks
 utils.xaxis_months(fig, ax)
 
+ax_r.set_ylim(bottom=0)
 ax.set_xlabel("Forecast date")
 ax.set_ylabel("Mean Absolute Percentage Error")
 ax_r.set_ylabel("Daily Deaths")
