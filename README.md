@@ -19,6 +19,7 @@ A collection of Bash and Python scripts to download, process, plot, and compare 
 
 - CDC: https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36
 - NCHS: https://www.cdc.gov/nchs/nvss/covid-19.htm
+- UMN: https://carlsonschool.umn.edu/mili-misrc-covid19-tracking-project
 
 ## Forecasts available:
 
