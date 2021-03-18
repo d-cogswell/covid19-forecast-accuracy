@@ -8,7 +8,7 @@ import utils
 def load(location="US"):
 
     df = pd.read_csv(
-        'truth/healthdata.gov/reported_hospitalization_utilization_timeseries.csv')
+        'truth/healthdata.gov/COVID-19_Reported_Patient_Impact_and_Hospital_Capacity_by_State_Timeseries.csv')
 
     if location == "US":
         # Group by date to combine state data

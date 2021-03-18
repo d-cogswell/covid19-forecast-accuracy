@@ -13,7 +13,7 @@ A collection of Bash and Python scripts to download, process, plot, and compare 
 
 - JHU CSSE: https://coronavirus.jhu.edu/
 - covidtracking.com: https://covidtracking.com/
-- healthdata.gov: https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-state-timeseries
+- healthdata.gov: https://healthdata.gov/Hospital/COVID-19-Reported-Patient-Impact-and-Hospital-Capa/g62h-syeh
 
 ### Not yet implemented
 
