@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
 import numpy as np
 
 import utils
@@ -42,7 +43,8 @@ plt.fill_between(q50.keys(), q25, q75, color='gray', alpha=0.2)
 
 ax.set_xlabel('Forecasted days ahead')
 ax.set_ylabel('Median Percentage Error')
-
+ax.yaxis.set_major_formatter(PercentFormatter(1))
+plt.tight_layout()
 plt.show()
 
 
@@ -73,5 +75,7 @@ utils.xaxis_months(fig, ax)
 ax_r.set_ylim(bottom=0)
 ax.set_xlabel("Forecast date")
 ax.set_ylabel("Mean Absolute Percentage Error")
+ax.yaxis.set_major_formatter(PercentFormatter(1))
 ax_r.set_ylabel("Daily Deaths")
+plt.tight_layout()
 plt.show()
