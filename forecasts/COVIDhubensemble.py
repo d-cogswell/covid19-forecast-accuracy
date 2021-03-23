@@ -15,6 +15,29 @@ def list_models():
     return(dirnames)
 
 
+def print_stats(model='COVIDhub-ensemble'):
+    forecast_dates = list_dates(model=model)
+
+    if len(forecast_dates):
+        earliest_forecast = forecast_dates[0]
+        latest_forecast = forecast_dates[-1]
+
+        days = 0
+        for date in forecast_dates:
+            forecast_df = load(date, model=model)
+            if len(forecast_df['date']):
+                last_day = forecast_df['date'].iat[-1]
+                days = days + (last_day - date).days
+
+        avg_forecast_len = days/len(forecast_dates)
+
+        print(model)
+        print("\tEarliest forecast: " + earliest_forecast.strftime('%Y-%m-%d'))
+        print("\tLatest forecast: " + latest_forecast.strftime('%Y-%m-%d'))
+        print("\tNumber of forecasts: " + str(len(forecast_dates)))
+        print('\tAverage forecast length:', avg_forecast_len)
+
+
 # Returns a dictionary of models and weights to create the ensemble
 def ensemble_model_weights_cumDeaths(date, location="US"):
     datestr = pd.to_datetime(date).strftime('%Y-%m-%d')
