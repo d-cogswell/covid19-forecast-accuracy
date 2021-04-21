@@ -10,7 +10,7 @@ def moving_avg(x, N):
 
 def xaxis_months(fig, ax):
     ax.xaxis.set_major_locator(mdates.MonthLocator())
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b'))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%y'))
     fig.autofmt_xdate()
 
 
