@@ -33,6 +33,7 @@ for date in forecast_dates:
 utils.xaxis_months(fig, ax)
 
 ax.set_xlim(left=datetime(2020, 3, 1))
+ax.set_ylim(bottom=0)
 ax.set_title(utils.get_location_string(loc))
 ax.set_xlabel('Date')
 ax.set_ylabel('Deaths')

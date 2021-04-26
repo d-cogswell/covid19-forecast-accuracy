@@ -72,10 +72,11 @@ for h in utils.holidays.keys():
 # format the ticks
 utils.xaxis_months(fig, ax)
 
-ax_r.set_ylim(bottom=0)
+ax.set_ylim(bottom=0)
 ax.set_xlabel("Forecast date")
 ax.set_ylabel("Mean Absolute Percentage Error")
 ax.yaxis.set_major_formatter(PercentFormatter(1))
+ax_r.set_ylim(bottom=0)
 ax_r.set_ylabel("Daily Deaths")
 plt.tight_layout()
 plt.show()
