@@ -40,7 +40,9 @@ def load(date, location="United States of America", model=None):
         path = osp.join(dir, pd.to_datetime(date).strftime('%Y-%m-%d'), f)
         if osp.exists(path):
             csv_path = path
-    data = pd.read_csv(csv_path)
+    data = pd.read_csv(csv_path, dtype={
+        'confirmed_infections_data_type': str,
+        'seroprev_data_type': str})
 
     # If location is an abbreviation, convert to name
     if location in utils.abbr_to_state.keys():
