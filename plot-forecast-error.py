@@ -52,6 +52,9 @@ plt.show()
 ##############################################################################
 fig, ax = plt.subplots()
 
+# Selected completed forecasts
+error_df = error_df[error_df['forecast_completed'] == True]
+
 # Plot MAPE
 error_df['error'] = np.abs(error_df['error'])
 df_error_mean = error_df.groupby('forecast_date')['error'].mean()

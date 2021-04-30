@@ -130,13 +130,16 @@ def compute_error_all_forecasts(forecast, truth_df, errorFunc,
                                 field='cumDeaths', dates=None,
                                 location="US", model="COVIDhub-ensemble"):
     """Returns a DataFrame with error computed for every forecast"""
-    df = pd.DataFrame({'forecast_date': [], 'date': [],
-                       'days_ahead': [], 'error': []})
+    df = pd.DataFrame({'forecast_date': [], 'forecast_completed': [
+    ], 'date': [], 'days_ahead': [], 'error': []})
     if dates is None:
         dates = forecast.list_dates(model)
 
     for d in dates:
         data = forecast.load(d, location=location, model=model)
+
+        # Check if truth data exists for the last forecast date
+        forecast_completed = data['date'].iat[-1] <= truth_df['date'].iat[-1]
 
         # Compute the error
         err = model_error(truth_df['date'], truth_df[field],
@@ -144,8 +147,8 @@ def compute_error_all_forecasts(forecast, truth_df, errorFunc,
         time_diff = data['date']-d
         days = time_diff.dt.days.tolist()
 
-        new = pd.DataFrame({'forecast_date': [
-                           d]*len(err), 'date': data['date'], 'days_ahead': days, 'error': err})
+        new = pd.DataFrame({'forecast_date': [d]*len(err), 'forecast_completed': [
+                           forecast_completed]*len(err), 'date': data['date'], 'days_ahead': days, 'error': err})
         df = pd.concat([df, new], axis=0)
 
     # Filter out NaN
