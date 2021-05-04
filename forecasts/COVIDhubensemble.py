@@ -98,6 +98,8 @@ def load(date, location="US", model="COVIDhub-ensemble"):
 
     # #Define standard fields
     hospitalAdmissions_df = data[data['target'].str.contains('inc hosp')]
+    deaths_df = data[data['target'].str.contains('inc death')]
+    cumDeaths_df = data[data['target'].str.contains('cum death')]
 
     # Before 12/7/20, COVIDhub-ensemble hospitalizations are reported in a separate file downloaded from the CDC website
     if date < datetime(2020, 12, 7):
@@ -108,15 +110,17 @@ def load(date, location="US", model="COVIDhub-ensemble"):
             'date': hospitalAdmissions_df['target_end_date'],
             'hospitalAdmissions': hospitalAdmissions_df['value']})
 
-    cumDeath_df = data[data['target'].str.contains('cum death')]
-    cumDeath_df = pd.DataFrame({
-        'date': cumDeath_df['target_end_date'],
-        'cumDeaths': cumDeath_df['value']})
-
     # Create merged data frame
-    merged = pd.merge(hospitalAdmissions_df, cumDeath_df,
-                      on='date', sort=True, how='outer')
-    return(merged)
+    merged_df = pd.merge(
+        pd.DataFrame({'date': deaths_df['target_end_date'],
+                      'deaths': deaths_df['value']}),
+        pd.DataFrame({'date': cumDeaths_df['target_end_date'],
+                      'cumDeaths': cumDeaths_df['value']}),
+        on='date',
+        how='outer')
+    merged_df = pd.merge(merged_df, hospitalAdmissions_df,
+                         how='outer', on='date', sort=True)
+    return(merged_df)
 
 
 # This function loads hospitalization forecasts downloaded from the CDC website
