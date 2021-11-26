@@ -68,8 +68,7 @@ ax_r.plot(truth_date, truth_deaths, color='black')
 
 # Plot holidays
 truth_dict = dict(zip(truth_date, truth_deaths))
-for h in utils.holidays.keys():
-    date = utils.holidays[h]
+for date in utils.holidays.keys():
     ax_r.vlines(date, 0, truth_dict[date], ls='--', color='gray')
 
 # format the ticks

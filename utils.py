@@ -22,14 +22,14 @@ def get_location_string(location):
 
 
 holidays = {
-    'Easter': datetime(2020, 4, 12),
-    'Memorial Day': datetime(2020, 5, 25),
-    'Independence Day': datetime(2020, 7, 4),
-    'Labor Day': datetime(2020, 9, 7),
-    'Thanksgiving': datetime(2020, 11, 26),
-    'Christmas': datetime(2020, 12, 25),
-    'New years': datetime(2021, 1, 1),
-    'Texas storms': datetime(2021, 2, 13)
+    datetime(2020, 4, 12): 'Easter',
+    datetime(2020, 5, 25): 'Memorial Day',
+    datetime(2020, 7, 4): 'Independence Day',
+    datetime(2020, 9, 7): 'Labor Day',
+    datetime(2020, 11, 26): 'Thanksgiving',
+    datetime(2020, 12, 25): 'Christmas',
+    datetime(2021, 1, 1): 'New years',
+    datetime(2021, 2, 13): 'Texas storms'
 }
 
 
